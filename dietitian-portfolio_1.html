@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dt. Nanditha R Gowda— Clinical Nutrition & Dietetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14201c;
+    --paper:#f4f7f2;
+    --forest:#1f4b3f;
+    --forest-deep:#132e26;
+    --turmeric:#d9a441;
+    --coral:#e8916f;
+    --mist:#dfe8e0;
+    --line: rgba(20,32,28,0.14);
+    --max: 1080px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--forest);
+    opacity:0.75;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 32px; }
+
+  /* ---------- animated background ---------- */
+  .bg-layer{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(60px); opacity:0.35;
+    animation: drift 26s ease-in-out infinite;
+  }
+  .blob.b1{ width:520px; height:520px; background:var(--forest); top:-140px; left:-120px; animation-duration:32s; }
+  .blob.b2{ width:420px; height:420px; background:var(--turmeric); top:20%; right:-160px; animation-duration:28s; animation-delay:-6s; }
+  .blob.b3{ width:380px; height:380px; background:var(--coral); bottom:0; left:15%; animation-duration:36s; animation-delay:-14s; }
+  .blob.b4{ width:300px; height:300px; background:var(--mist); top:55%; left:55%; animation-duration:24s; animation-delay:-9s; opacity:0.5;}
+  @keyframes drift{
+    0%   { transform: translate(0,0) scale(1); }
+    33%  { transform: translate(40px,-30px) scale(1.08); }
+    66%  { transform: translate(-30px,25px) scale(0.95); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .blob{ animation:none; }
+  }
+
+  /* pulse divider — signature element */
+  .pulse-divider{ position:relative; width:100%; height:64px; overflow:hidden; z-index:1; }
+  .pulse-divider svg{ width:100%; height:100%; }
+  .pulse-path{
+    fill:none; stroke:var(--forest); stroke-width:2; opacity:0.55;
+    stroke-dasharray: 1400; stroke-dashoffset:1400;
+    transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
+  }
+  .pulse-divider.in-view .pulse-path{ stroke-dashoffset:0; }
+
+  section{ position:relative; z-index:1; }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px;
+    backdrop-filter:blur(10px);
+    background:rgba(244,247,242,0.7);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .brand{ font-family:'Fraunces', serif; font-weight:650; font-size:1.05rem; }
+  .nav .brand span{ color:var(--forest); }
+  .progress-track{ position:absolute; bottom:-1px; left:0; height:2px; background:var(--turmeric); width:0%; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding-top:80px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:220px 1fr; gap:56px; align-items:center;
+    width:100%;
+  }
+  .doctor-photo{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  overflow:hidden;
+  border:6px solid #fff;
+  box-shadow:0 18px 40px rgba(20,32,28,0.18);
+  flex-shrink:0;
+}
+
+.doctor-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+  .doctor-photo::after{
+    position:absolute; bottom:-28px; left:50%; transform:translateX(-50%);
+    font-family:'Space Mono', monospace; font-size:0.62rem; color:var(--forest); opacity:0.55; white-space:nowrap;
+  }
+  .hero h1{ font-size:clamp(2.4rem, 5vw, 3.6rem); font-weight:650; line-height:1.05; }
+  .hero .role{ margin-top:14px; font-size:1.05rem; color:var(--forest); font-weight:500; }
+  .hero p.tagline{ margin-top:18px; max-width:480px; font-size:1.05rem; line-height:1.6; color:#3a4640; }
+  .hero .cta-row{ margin-top:28px; display:flex; gap:14px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:999px; font-weight:500; font-size:0.92rem;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-primary{ background:var(--forest); color:var(--paper); }
+  .btn-primary:hover{ background:var(--forest-deep); }
+  .btn-ghost{ border-color:var(--line); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--forest); }
+
+  @media (max-width:640px){
+    .hero-grid{ grid-template-columns:1fr; text-align:center; }
+    .doctor-photo{ margin:0 auto; }
+    .hero p.tagline{ margin-inline:auto; }
+    .cta-row{ justify-content:center; }
+  }
+
+  /* ---------- stats strip ---------- */
+  .stats{ padding:10px 0 60px; }
+  .stats .wrap{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:32px 32px;
+  }
+  .stat{ text-align:center; }
+  .stat .num{ font-family:'Fraunces', serif; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--forest); font-weight:650; }
+  .stat .label{ margin-top:6px; font-family:'Space Mono', monospace; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:#4a564f; }
+  @media (max-width:640px){ .stats .wrap{ grid-template-columns:1fr; gap:26px; } }
+
+  /* ---------- questions sequence ---------- */
+  .q-intro{ padding:100px 0 20px; text-align:center; }
+  .q-intro .eyebrow{ display:block; margin-bottom:10px; }
+  .q-intro h2{ font-size:clamp(1.6rem,4vw,2.3rem); max-width:620px; margin:0 auto; }
+
+  .question-section{
+    min-height:80vh;
+    display:flex; align-items:center;
+    padding:40px 24px;
+    overflow:hidden;
+  }
+  .q-row{
+    max-width:var(--max); margin:0 auto; width:100%;
+    display:flex; align-items:center; justify-content:space-between; gap:48px;
+  }
+  .question-section.align-right .q-row{ flex-direction:row-reverse; }
+  .question-card{
+    max-width:600px;
+    opacity:0; transition:opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .question-card.from-left{ transform:translateX(-110px); text-align:left; }
+  .question-card.from-right{ transform:translateX(110px); text-align:right; }
+  .question-card.in-view{ opacity:1; transform:translateX(0); }
+  .question-card .qnum{
+    font-family:'Space Mono', monospace; font-size:0.75rem; color:var(--turmeric);
+    letter-spacing:0.14em; margin-bottom:18px; display:block;
+  }
+  .question-card h3{
+    font-size:clamp(1.7rem, 4.2vw, 2.7rem); font-weight:560; line-height:1.22;
+    font-style:italic;
+  }
+  .question-card h3 .word{
+    display:inline-block;
+    opacity:0; transform:translateY(16px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+    transition-delay:calc(var(--i) * 0.045s);
+  }
+  .question-card.in-view h3 .word{ opacity:1; transform:translateY(0); }
+  .question-card .sub{ margin-top:16px; color:#4a564f; font-size:1rem; }
+  @media (max-width:700px){
+    .q-row{ flex-direction:column !important; gap:28px; }
+    .question-card.from-left, .question-card.from-right{ text-align:center; }
+  }
+
+  .q-close{ text-align:center; padding:20px 0 80px; }
+  .q-close p{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.5rem; color:var(--forest);
+  }
+
+  /* ---------- doctor illustrations (ghibli-style, one per question) ---------- */
+  .q-illustration{
+    flex-shrink:0;
+    opacity:0; transition:opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .q-illustration.ill-from-left{ transform:translateX(-90px); }
+  .q-illustration.ill-from-right{ transform:translateX(90px); }
+  .q-illustration.in-view{ opacity:1; transform:translateX(0); }
+  .illustration-frame-sm{
+    width:190px; height:190px; border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #eef4ec, var(--mist));
+    border:6px solid #fff; box-shadow:0 18px 38px rgba(20,32,28,0.15);
+    display:flex; align-items:center; justify-content:center; overflow:visible;
+    animation: float-doc 7s ease-in-out infinite;
+  }
+  .illustration-frame-sm svg{ width:92%; height:92%; }
+  .motes circle{ animation: mote-rise 8s ease-in-out infinite; }
+  @keyframes float-doc{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-12px); }
+  }
+  @keyframes mote-rise{
+    0%{ transform:translateY(0); opacity:0.15; }
+    50%{ transform:translateY(-18px); opacity:0.6; }
+    100%{ transform:translateY(0); opacity:0.15; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .illustration-frame-sm, .motes circle{ animation:none; }
+  }
+  @media (max-width:700px){
+    .illustration-frame-sm{ width:150px; height:150px; }
+  }
+
+  /* ---------- process ---------- */
+  .process{ padding:60px 0 100px; }
+  .process .head{ max-width:600px; margin-bottom:48px; }
+  .process .head h2{ font-size:clamp(1.9rem,4vw,2.6rem); margin-top:10px; }
+  .process-steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; }
+  .process-steps::before{
+    content:""; position:absolute; top:26px; left:8%; right:8%; height:1px;
+    background:var(--line); z-index:0;
+  }
+  .step{ position:relative; z-index:1; background:var(--paper); padding-right:12px; }
+  .step .stepnum{
+    width:52px; height:52px; border-radius:50%; background:var(--forest); color:var(--paper);
+    font-family:'Fraunces', serif; font-size:1.1rem; display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+  }
+  .step h3{ font-size:1.15rem; font-family:'Work Sans', sans-serif; font-weight:600; }
+  .step p{ margin-top:8px; font-size:0.92rem; line-height:1.55; color:#4a564f; }
+  @media (max-width:800px){
+    .process-steps{ grid-template-columns:1fr; }
+    .process-steps::before{ display:none; }
+  }
+
+  /* ---------- testimonials ---------- 
+  .testimonials{ padding:20px 0 100px; }
+  .testimonials .head{ max-width:600px; margin-bottom:40px; }
+  .testimonials .head h2{ font-size:clamp(1.9rem,4vw,2.6rem); margin-top:10px; }
+  .t-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .t-card{
+    background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px 24px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .t-card .quote{ font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem; line-height:1.5; color:var(--ink); }
+  .t-card .who{ font-family:'Space Mono', monospace; font-size:0.72rem; color:var(--forest); letter-spacing:0.04em; }
+  @media (max-width:900px){ .t-grid{ grid-template-columns:1fr; } }*/
+
+  /* ---------- faq ---------- */
+  .faq{ padding:20px 0 100px; }
+  .faq .head{ max-width:600px; margin-bottom:36px; }
+  .faq .head h2{ font-size:clamp(1.9rem,4vw,2.6rem); margin-top:10px; }
+  .faq-list{ max-width:760px; }
+  .faq-item{ border-bottom:1px solid var(--line); padding:6px 0; }
+  .faq-item summary{
+    cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between;
+    padding:16px 4px; font-weight:500; font-size:1.02rem;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content:"+"; font-family:'Fraunces', serif; font-size:1.4rem; color:var(--forest); margin-left:16px; transition:transform 0.25s ease;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item p{ margin:0 4px 18px; color:#4a564f; line-height:1.6; font-size:0.95rem; }
+
+  /* ---------- services ---------- */
+  .services{ padding:60px 0 100px; }
+  .services .head{ max-width:600px; margin-bottom:48px; }
+  .services .head h2{ font-size:clamp(1.9rem,4vw,2.6rem); margin-top:10px; }
+  .service-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  }
+  .service-card{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:28px 24px; transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px rgba(20,32,28,0.1); }
+  .service-card .icon{
+    width:40px; height:40px; border-radius:10px; background:var(--mist);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+    color:var(--forest);
+  }
+  .service-card h3{ font-size:1.15rem; font-weight:600; font-family:'Work Sans', sans-serif; }
+  .service-card p{ margin-top:10px; font-size:0.92rem; line-height:1.55; color:#4a564f; }
+
+  @media (max-width:900px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .service-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- about ---------- */
+  .about{ padding:60px 0 100px; }
+  .about-grid{ display:grid; grid-template-columns:1fr 1.3fr; gap:56px; align-items:center; }
+  .about-photo{
+    aspect-ratio:4/5; border-radius:22px;
+    background:linear-gradient(160deg, var(--mist), var(--paper));
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace; font-size:0.75rem; color:var(--forest); opacity:0.6; text-align:center; padding:20px;
+  }
+  .about h2{ font-size:clamp(1.8rem,3.6vw,2.4rem); }
+  .about p{ margin-top:16px; line-height:1.7; color:#3a4640; font-size:1.02rem; }
+  .credentials{ margin-top:22px; display:flex; flex-wrap:wrap; gap:10px; }
+  .credentials span{
+    font-family:'Space Mono', monospace; font-size:0.72rem; letter-spacing:0.04em;
+    background:var(--mist); padding:7px 14px; border-radius:999px; color:var(--forest-deep);
+  }
+  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- contact ---------- */
+  .contact{
+    padding:80px 0 100px;
+    background:var(--forest);
+    color:var(--paper);
+    border-radius:32px 32px 0 0;
+    margin-top:20px;
+  }
+  .contact .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .contact .eyebrow{ color:var(--turmeric); opacity:1; }
+  .contact h2{ font-size:clamp(1.9rem,4vw,2.6rem); color:var(--paper); margin-top:10px; }
+  .contact p.lead{ margin-top:16px; color:#cfe0d8; line-height:1.6; max-width:420px; }
+
+  .social-row{ margin-top:34px; display:flex; gap:14px; }
+  .social-btn{
+    width:46px; height:46px; border-radius:50%; border:1px solid rgba(244,247,242,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--paper);
+    text-decoration:none; transition:background 0.25s ease;
+  }
+  .social-btn:hover{ background:rgba(244,247,242,0.12); }
+
+  form.contact-form{ display:flex; flex-direction:column; gap:14px; }
+  .contact-form input, .contact-form textarea{
+    width:100%; padding:14px 16px; border-radius:12px; border:1px solid rgba(244,247,242,0.25);
+    background:rgba(244,247,242,0.06); color:var(--paper); font-family:'Work Sans', sans-serif; font-size:0.95rem;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder{ color:#b9ccc2; }
+  .contact-form textarea{ min-height:120px; resize:vertical; }
+  .contact-form button{
+    margin-top:6px; padding:14px 22px; border-radius:999px; border:none;
+    background:var(--turmeric); color:var(--forest-deep); font-weight:600; cursor:pointer;
+    font-size:0.95rem;
+  }
+  .contact-form button:hover{ filter:brightness(1.06); }
+  .form-note{ font-family:'Space Mono', monospace; font-size:0.68rem; color:#9fc4b5; margin-top:4px; }
+  #form-status{ font-size:0.85rem; margin-top:8px; min-height:18px; }
+
+  @media (max-width:800px){ .contact .wrap{ grid-template-columns:1fr; } }
+
+  footer{
+    background:var(--forest); color:#b9ccc2; text-align:center; padding:24px 0 34px;
+    font-size:0.8rem; font-family:'Space Mono', monospace;
+  }
+
+  .reveal{
+    opacity:0; transform:translateY(24px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  :focus-visible{ outline:2px solid var(--turmeric); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<div class="bg-layer" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<header class="nav">
+  <div class="brand">Dt. Nanditha R Gowda<span>· NRG</span></div>
+  <a href="#contact" class="btn btn-primary" style="padding:9px 18px; font-size:0.85rem;">Book a consult</a>
+  <div class="progress-track" id="progressTrack"></div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="doctor-photo">
+
+      <img src="images/nanditha.png" alt="Dt. Nanditha R Gowda">
+
+    </div>
+    <div>
+      <span class="eyebrow">Clinical Nutrition &amp; Dietetics</span>
+      <h1 style="margin-top:8px;">Food that works with your body, not against it.</h1>
+      <p class="tagline">Dt. Nanditha R Gowda is a registered dietitian helping people untangle anemia, stubborn weight, hormonal imbalance, and everyday fatigue — with plans built around real life, not restriction.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Start your plan</a>
+        <a href="#services" class="btn btn-ghost">See services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat reveal"><div class="num">2+</div><div class="label">Years in clinical practice</div></div>
+    <div class="stat reveal"><div class="num">20+</div><div class="label">Patients guided</div></div>
+    <div class="stat reveal"><div class="num">3</div><div class="label">Clinical certifications</div></div>
+  </div>
+</section>
+
+<div class="pulse-divider" data-pulse>
+  <svg viewBox="0 0 1000 64" preserveAspectRatio="none">
+    <path class="pulse-path" d="M0,32 L360,32 L385,10 L410,54 L435,32 L470,32 L490,20 L510,44 L530,32 L1000,32" />
+  </svg>
+</div>
+
+<!-- ================= QUESTIONS ================= -->
+<section id="questions">
+  <div class="q-intro reveal">
+    <span class="eyebrow">Does this sound like you?</span>
+    <h2>A lot of people carry these questions alone. You don't have to.</h2>
+  </div>
+
+  <div class="question-section align-left">
+    <div class="q-row">
+      <div class="question-card from-left">
+        <span class="qnum">01</span>
+        <h3><span class="word" style="--i:0">Are</span> <span class="word" style="--i:1">you</span> <span class="word" style="--i:2">struggling</span> <span class="word" style="--i:3">with</span> <span class="word" style="--i:4">anemia?</span></h3>
+        <p class="sub">Constant tiredness, pale skin, or dizziness that blood work confirms — but nothing seems to fix.</p>
+      </div>
+      <div class="q-illustration ill-from-right">
+        <div class="illustration-frame-sm" style="animation-delay:-1s;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="motes" opacity="0.7">
+              <circle cx="26" cy="150" r="2.2" fill="var(--coral)" style="animation-delay:-1s"/>
+              <circle cx="172" cy="60" r="2" fill="var(--turmeric)" style="animation-delay:-3.5s"/>
+            </g>
+            <path d="M46 96c-4-38 20-62 54-62s58 24 54 62c-2 18-6 30-10 38-2-22-8-34-18-40 2 10 0 20-4 26-6-18-14-26-26-28-12 2-20 10-26 28-4-6-6-16-4-26-10 6-16 18-18 40-4-8-8-20-10-38z" fill="#6b5142"/>
+            <rect x="88" y="118" width="24" height="22" rx="8" fill="#eec6a8"/>
+            <path d="M42 190c2-30 22-46 58-46s56 16 58 46z" fill="#ffffff" stroke="var(--line)" stroke-width="1"/>
+            <path d="M78 146l22 18 22-18-10 44H88z" fill="var(--coral)"/>
+            <path d="M74 146l10 10-8 8-14-12z" fill="#ffffff"/>
+            <path d="M126 146l-10 10 8 8 14-12z" fill="#ffffff"/>
+            <ellipse cx="100" cy="98" rx="38" ry="40" fill="#efc9ab"/>
+            <ellipse cx="76" cy="112" rx="6" ry="4" fill="var(--coral)" opacity="0.3"/>
+            <ellipse cx="124" cy="112" rx="6" ry="4" fill="var(--coral)" opacity="0.3"/>
+            <path d="M78 98q6 5 12 0" fill="none" stroke="#4a382c" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M110 98q6 5 12 0" fill="none" stroke="#4a382c" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M92 118q8 5 16 0" fill="none" stroke="#a05a3f" stroke-width="2" stroke-linecap="round"/>
+            <path d="M62 78c4-22 18-34 38-34s34 12 38 34c-6-8-16-12-38-12s-32 4-38 12z" fill="#6b5142"/>
+            <!-- pomegranate + droplet, iron motif -->
+            <g transform="translate(154,52)">
+              <circle r="13" fill="#c0392b"/>
+              <path d="M0-13c3-4 7-4 8 0" fill="none" stroke="#7a2318" stroke-width="1.4"/>
+              <circle cx="-3" cy="-2" r="2" fill="#f6d9c9" opacity="0.85"/>
+              <circle cx="4" cy="4" r="2" fill="#f6d9c9" opacity="0.85"/>
+            </g>
+            <path d="M158 76c-6 8-6 14 0 18 6-4 6-10 0-18z" fill="#c0392b" opacity="0.9"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-section align-right">
+    <div class="q-row">
+      <div class="question-card from-right">
+        <span class="qnum">02</span>
+        <h3><span class="word" style="--i:0">Trying</span> <span class="word" style="--i:1">to</span> <span class="word" style="--i:2">gain</span> <span class="word" style="--i:3">—</span> <span class="word" style="--i:4">or</span> <span class="word" style="--i:5">lose</span> <span class="word" style="--i:6">—</span> <span class="word" style="--i:7">weight,</span> <span class="word" style="--i:8">and</span> <span class="word" style="--i:9">nothing</span> <span class="word" style="--i:10">seems</span> <span class="word" style="--i:11">to</span> <span class="word" style="--i:12">work?</span></h3>
+        <p class="sub">Diets that worked for someone else, that haven't worked for you.</p>
+      </div>
+      <div class="q-illustration ill-from-left">
+        <div class="illustration-frame-sm" style="animation-delay:-3s;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="motes" opacity="0.7">
+              <circle cx="30" cy="55" r="2.2" fill="var(--turmeric)" style="animation-delay:-2s"/>
+              <circle cx="168" cy="150" r="2" fill="var(--forest)" style="animation-delay:-4.5s"/>
+            </g>
+            <path d="M46 96c-4-38 20-62 54-62s58 24 54 62c-2 18-6 30-10 38-2-22-8-34-18-40 2 10 0 20-4 26-6-18-14-26-26-28-12 2-20 10-26 28-4-6-6-16-4-26-10 6-16 18-18 40-4-8-8-20-10-38z" fill="#4a3527"/>
+            <rect x="88" y="118" width="24" height="22" rx="8" fill="#f0c8a0"/>
+            <path d="M42 190c2-30 22-46 58-46s56 16 58 46z" fill="#ffffff" stroke="var(--line)" stroke-width="1"/>
+            <path d="M78 146l22 18 22-18-10 44H88z" fill="var(--forest)"/>
+            <path d="M74 146l10 10-8 8-14-12z" fill="#ffffff"/>
+            <path d="M126 146l-10 10 8 8 14-12z" fill="#ffffff"/>
+            <ellipse cx="100" cy="98" rx="38" ry="40" fill="#f5cfa4"/>
+            <ellipse cx="76" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <ellipse cx="124" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <path d="M78 96q6 6 12 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M110 96q6 6 12 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M90 116q10 8 20 0" fill="none" stroke="#a05a3f" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M62 78c4-22 18-34 38-34s34 12 38 34c-6-8-16-12-38-12s-32 4-38 12z" fill="#4a3527"/>
+            <!-- balance bowl motif -->
+            <g transform="translate(150,60)">
+              <path d="M-14 4a14 8 0 0 0 28 0z" fill="var(--turmeric)"/>
+              <ellipse cx="0" cy="4" rx="14" ry="4" fill="none" stroke="#a8791f" stroke-width="1"/>
+              <circle cx="-6" cy="-2" r="3" fill="var(--coral)"/>
+              <circle cx="3" cy="-5" r="3" fill="var(--forest)"/>
+              <circle cx="7" cy="0" r="2.4" fill="#f5cfa4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-section align-left">
+    <div class="q-row">
+      <div class="question-card from-left">
+        <span class="qnum">03</span>
+        <h3><span class="word" style="--i:0">Bloating,</span> <span class="word" style="--i:1">fatigue,</span> <span class="word" style="--i:2">or</span> <span class="word" style="--i:3">brain</span> <span class="word" style="--i:4">fog</span> <span class="word" style="--i:5">after</span> <span class="word" style="--i:6">meals?</span></h3>
+        <p class="sub">Your gut has been trying to tell you something for a while now.</p>
+      </div>
+      <div class="q-illustration ill-from-right">
+        <div class="illustration-frame-sm" style="animation-delay:-5s;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="motes" opacity="0.7">
+              <circle cx="28" cy="60" r="2.2" fill="var(--forest)" style="animation-delay:-1.5s"/>
+              <circle cx="170" cy="145" r="2" fill="var(--turmeric)" style="animation-delay:-4s"/>
+            </g>
+            <path d="M46 96c-4-38 20-62 54-62s58 24 54 62c-2 18-6 30-10 38-2-22-8-34-18-40 2 10 0 20-4 26-6-18-14-26-26-28-12 2-20 10-26 28-4-6-6-16-4-26-10 6-16 18-18 40-4-8-8-20-10-38z" fill="#5b4636"/>
+            <rect x="88" y="118" width="24" height="22" rx="8" fill="#f0c8a0"/>
+            <path d="M42 190c2-30 22-46 58-46s56 16 58 46z" fill="#ffffff" stroke="var(--line)" stroke-width="1"/>
+            <path d="M78 146l22 18 22-18-10 44H88z" fill="var(--forest)"/>
+            <path d="M74 146l10 10-8 8-14-12z" fill="#ffffff"/>
+            <path d="M126 146l-10 10 8 8 14-12z" fill="#ffffff"/>
+            <ellipse cx="100" cy="98" rx="38" ry="40" fill="#f5cfa4"/>
+            <ellipse cx="76" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <ellipse cx="124" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <path d="M78 98q6 4 12 0" fill="none" stroke="#3a2a20" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M110 98q6 4 12 0" fill="none" stroke="#3a2a20" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M92 116q8 6 16 0" fill="none" stroke="#a05a3f" stroke-width="2" stroke-linecap="round"/>
+            <path d="M62 78c4-22 18-34 38-34s34 12 38 34c-6-8-16-12-38-12s-32 4-38 12z" fill="#5b4636"/>
+            <!-- calming teacup + steam -->
+            <g transform="translate(150,58)">
+              <path d="M-12-4h20v10a10 8 0 0 1-20 0z" fill="#eef4ec" stroke="var(--forest)" stroke-width="1.4"/>
+              <path d="M9 2c4-1 6 2 4 5" fill="none" stroke="var(--forest)" stroke-width="1.4"/>
+              <path d="M-6-8c-2-4 2-6 0-10" fill="none" stroke="var(--forest)" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <path d="M0-8c-2-4 2-6 0-10" fill="none" stroke="var(--forest)" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-section align-right">
+    <div class="q-row">
+      <div class="question-card from-right">
+        <span class="qnum">04</span>
+        <h3><span class="word" style="--i:0">Managing</span> <span class="word" style="--i:1">PCOS,</span> <span class="word" style="--i:2">thyroid,</span> <span class="word" style="--i:3">or</span> <span class="word" style="--i:4">blood</span> <span class="word" style="--i:5">sugar</span> <span class="word" style="--i:6">mostly</span> <span class="word" style="--i:7">on</span> <span class="word" style="--i:8">your</span> <span class="word" style="--i:9">own?</span></h3>
+        <p class="sub">A plan that actually accounts for your labs, not a generic template.</p>
+      </div>
+      <div class="q-illustration ill-from-left">
+        <div class="illustration-frame-sm" style="animation-delay:-2.2s;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="motes" opacity="0.7">
+              <circle cx="26" cy="145" r="2.2" fill="var(--coral)" style="animation-delay:-3.2s"/>
+              <circle cx="172" cy="58" r="2" fill="var(--forest)" style="animation-delay:-1.2s"/>
+            </g>
+            <path d="M46 96c-4-38 20-62 54-62s58 24 54 62c-2 18-6 30-10 38-2-22-8-34-18-40 2 10 0 20-4 26-6-18-14-26-26-28-12 2-20 10-26 28-4-6-6-16-4-26-10 6-16 18-18 40-4-8-8-20-10-38z" fill="#3f3226"/>
+            <rect x="88" y="118" width="24" height="22" rx="8" fill="#f0c8a0"/>
+            <path d="M42 190c2-30 22-46 58-46s56 16 58 46z" fill="#ffffff" stroke="var(--line)" stroke-width="1"/>
+            <path d="M78 146l22 18 22-18-10 44H88z" fill="var(--forest)"/>
+            <path d="M74 146l10 10-8 8-14-12z" fill="#ffffff"/>
+            <path d="M126 146l-10 10 8 8 14-12z" fill="#ffffff"/>
+            <ellipse cx="100" cy="98" rx="38" ry="40" fill="#f5cfa4"/>
+            <ellipse cx="76" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <ellipse cx="124" cy="108" rx="7" ry="5" fill="var(--coral)" opacity="0.4"/>
+            <path d="M78 96q6 6 12 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M110 96q6 6 12 0" fill="none" stroke="#3a2a20" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M90 116q10 8 20 0" fill="none" stroke="#a05a3f" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M62 78c4-22 18-34 38-34s34 12 38 34c-6-8-16-12-38-12s-32 4-38 12z" fill="#3f3226"/>
+            <!-- cycle / moon-phase motif for hormonal rhythm -->
+            <g transform="translate(152,60)">
+              <circle r="13" fill="none" stroke="var(--forest)" stroke-width="1.4" stroke-dasharray="3 4"/>
+              <circle cx="0" cy="-13" r="3" fill="var(--coral)"/>
+              <circle cx="13" cy="0" r="3" fill="var(--turmeric)"/>
+              <circle cx="0" cy="13" r="3" fill="var(--forest)"/>
+              <circle cx="-13" cy="0" r="3" fill="#f5cfa4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="q-close reveal">
+    <p>You don't have to figure this out alone.</p>
+  </div>
+</section>
+
+<div class="pulse-divider" data-pulse>
+  <svg viewBox="0 0 1000 64" preserveAspectRatio="none">
+    <path class="pulse-path" d="M0,32 L360,32 L385,10 L410,54 L435,32 L470,32 L490,20 L510,44 L530,32 L1000,32" />
+  </svg>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">How I help</span>
+      <h2>Care built around your actual labs and life, not a template.</h2>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 2.5 4.5 6.5 4.5c2 0 3.5 1.2 4.5 2.7C12 5.7 13.5 4.5 15.5 4.5c4 0 6 4 4 8-2.5 4.15-9.5 8.5-9.5 8.5z"/></svg>
+        </div>
+        <h3>Anemia &amp; Micronutrient Recovery</h3>
+        <p>Targeted plans to rebuild iron, B12, and folate levels, paired with foods that actually help absorption.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16M6 20V10m12 10V4M12 20V14"/></svg>
+        </div>
+        <h3>Weight Management</h3>
+        <p>Sustainable gain or loss plans built around your metabolism, schedule, and food preferences — not willpower.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+        </div>
+        <h3>PCOS, Thyroid &amp; Hormonal Health</h3>
+        <p>Nutrition strategies that work alongside your endocrinologist, tuned to your cycle and lab markers.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M5 8h14M7 14h10"/></svg>
+        </div>
+        <h3>Diabetes &amp; Blood Sugar Care</h3>
+        <p>Meal structures that keep glucose steady without cutting out everything you enjoy.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h8l-1 8 11-13h-8l1-7z"/></svg>
+        </div>
+        <h3>Sports &amp; Performance Nutrition</h3>
+        <p>Fueling and recovery plans for athletes and active people chasing a specific performance goal.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>
+        </div>
+        <h3>Corporate Wellness Programs</h3>
+        <p>Nutrition workshops and 1:1 sessions designed for teams, delivered on-site or virtually.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="process">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Three sessions, one plan that actually fits your reports.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step reveal">
+        <div class="stepnum">01</div>
+        <h3>Share your reports</h3>
+        <p>Send your latest labs and a quick history — anemia panels, thyroid, sugars, whatever you have.</p>
+      </div>
+      <div class="step reveal">
+        <div class="stepnum">02</div>
+        <h3>Get a custom plan</h3>
+        <p>A meal and lifestyle plan built around your numbers, your schedule, and food you'll actually eat.</p>
+      </div>
+      <div class="step reveal">
+        <div class="stepnum">03</div>
+        <h3>Ongoing check-ins</h3>
+        <p>Follow-up sessions to adjust the plan as your labs and life change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= 
+<section class="testimonials">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">In their words</span>
+      <h2>Patients who finally got answers.</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <p class="quote">"My iron levels finally moved after two years of nothing working. The plan was easy to actually stick to."</p>
+        <p class="who">— R.K., anemia &amp; fatigue</p>
+      </div>
+      <div class="t-card reveal">
+        <p class="quote">"First dietitian who looked at my thyroid labs before handing me a diet chart."</p>
+        <p class="who">— S.M., thyroid &amp; weight</p>
+      </div>
+      <div class="t-card reveal">
+        <p class="quote">"Lost the bloating within a month. Didn't expect it to be this straightforward."</p>
+        <p class="who">— A.P., digestive health</p>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Good to know</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>Do I need lab reports before my first session?</summary>
+        <p>Not required, but if you have recent blood work it helps build your plan faster. If you don't, we can start with a nutrition history and go from there.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are sessions online or in person?</summary>
+        <p>Both — most ongoing check-ins happen over video, and the first consult can be in person or online, whichever works for you.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long until I see results?</summary>
+        <p>It depends on the condition, but most patients notice early changes in energy and digestion within 2–4 weeks, with lab markers improving over 2–3 months.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work with existing medical conditions?</summary>
+        <p>Yes — plans are built to work alongside guidance from your physician or endocrinologist, not in place of it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+
+          <img src="images/nanditha.png" alt="Dt. Nanditha R Gowda">
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">About Dt.Nanditha R Gowda</span>
+      <h2 style="margin-top:8px;">Twelve years of turning lab reports into livable plans.</h2>
+      <p>I am a B.Sc. Nutrition student at BMS College for Women with a keen interest in food, nutrition, and healthy living. I am passionate about understanding the role of nutrition in promoting health and preventing disease. I enjoy learning about balanced diets, food science, and wellness, and I am committed to continuously expanding my knowledge to make a positive impact on individual and community health.
+
+        <span>Registered Dietitian</span>
+        <span>Certified Diabetes Educator</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Get in touch</span>
+      <h2>Let's build a plan around your reports.</h2>
+      <p class="lead">Send a note with what you're dealing with, or reach out directly on email or social. Replies usually come within one business day.</p>
+
+      <div class="social-row">
+        <a class="social-btn" href="mailto:nandithargowda2005@gmail.com" aria-label="Email" title="Email">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/nandithargowda7/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/in/nanditha-r-gowda-172a9939a/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5c0-1.4 1-2.5 2.4-2.5 1.3 0 2.1 1 2.1 2.5V17"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="contact-form" id="web3form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="508e692e-13e3-4f12-8e69-a9aefa0adb87">
+        <input type="hidden" name="subject" value="New enquiry from portfolio site">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="What are you looking for help with?" required></textarea>
+        <button type="submit">Send message</button>
+        <div id="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Dt. Nanditha R Gowda · Clinical Nutrition &amp; Dietetics
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // scroll progress bar
+  const track = document.getElementById('progressTrack');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    track.style.width = pct + '%';
+  });
+
+  // generic reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal, .question-card, .pulse-divider, .step, .t-card, .stat, .q-illustration');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in-view'); }
+    });
+  }, { threshold: 0.35 });
+  revealEls.forEach(el => io.observe(el));
+
+  // web3forms submit handling (AJAX, no page reload)
+  const form = document.getElementById('web3form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    status.textContent = 'Sending…';
+    status.style.color = '#e8d9b8';
+    try{
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      const data = await res.json();
+      if(data.success){
+        status.textContent = "Thanks — that's sent. I'll be in touch soon.";
+        status.style.color = '#bfe3c9';
+        form.reset();
+      } else {
+        status.textContent = 'Something went wrong. Please try emailing directly.';
+        status.style.color = '#f0b9a8';
+      }
+    }catch(err){
+      status.textContent = 'Network error — please try emailing directly.';
+      status.style.color = '#f0b9a8';
+    }
+  });
+</script>
+
+</body>
+</html>
